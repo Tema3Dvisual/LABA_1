@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+double lenghOfCircle(double radius) {
+    return 2 * 3.14 * radius;
+}
+
+double squareOfCircle(double radius) {
+    return 3.14 * radius * radius;
+}
+
+double squareOfSector(double radius, double angleDegrees) {
+    double angleRadians = angleDegrees * 3.14 / 180.0;
+    return 0.5 * radius * radius * angleRadians;
+}
+
+int main() {
+    double radius = 0, angle = 0;
+    while (radius <= 0) {
+        cout << "Введите радиус круга: ";
+        cin >> radius;
+        if (radius <= 0) {
+            cout << "Радиус должен быть больше нуля." << endl;
+        }
+    }
+
+    while (angle <= 0 || angle > 360) {
+        cout << "Введите угол сектора круга (в градусах): ";
+        cin >> angle;
+        if (angle <= 0 || angle > 360) {
+            cout << "Угол должен быть больше нуля и меньше либо равен 360 градусов." << endl;
+        }
+    }
+
+    cout << "Длина окружности: " << lenghOfCircle(radius) << endl;
+    cout << "Площадь круга: " << squareOfCircle(radius) << endl;
+    cout << "Площадь сектора: " << squareOfSector(radius, angle) << endl;
+
+    return 0;
+}
