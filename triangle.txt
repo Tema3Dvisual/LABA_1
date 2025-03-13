@@ -1,0 +1,51 @@
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+using namespace std;
+
+class Triangle {
+private:
+    double sideA, sideB, sideC;
+
+    bool check() const {
+        return (sideA + sideB > sideC) && (sideA + sideC > sideB) && (sideB + sideC > sideA);
+    }
+
+public:
+    //Проверка на существования треугольника
+    Triangle(double a, double b, double c) : sideA(a), sideB(b), sideC(c) {
+        if (!check()) {
+            throw invalid_argument("Треугольник не существует.");
+        }
+    }
+
+    // Вычисление периметра треугольника
+    double perimeter() const {
+        return sideA + sideB + sideC;
+    }
+
+    // Вычисление площади по формуле Герона
+    double square() const {
+        double p = perimeter() / 2; // Полупериметр
+        return sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
+    }
+
+    // Проверки на равнобедренность
+    bool isosceles() const {
+        return (sideA == sideB) (sideA == sideC) (sideB == sideC);
+    }
+};
+int main() {
+    setlocale(LC_ALL, "Russian");
+    try {
+        Triangle tri(1, 1, 1);
+        cout << "Периметр: " << tri.perimeter() << endl;
+        cout << "Площадь по формуле Герона: " << tri.square() << endl;
+        cout << "Треугольник равнобедренный?: " << (tri.isosceles() ? "Да" : "Нет") << endl;
+    }
+    catch (const invalid_argument& e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
+}
